@@ -1,2 +1,11 @@
 *.env
-/node_modules
+node_modules/
+dist/
+build/
+*.log
+*.sqlite
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
