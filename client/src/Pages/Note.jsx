@@ -1,28 +1,33 @@
 // import Navbar from "../Components/Navbar";
 import "./pages.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { AiOutlineRead } from "react-icons/ai";
+import { BiEdit } from "react-icons/bi";
+import { SlOptionsVertical } from "react-icons/sl";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 function Note () {
-    const [loading, setLoading] = useState(true);
-    const [editing, setEditing] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [title, setTitle] = useState('');
     const [main, setMain] = useState('');
+    const [editing, setEditing] = useState(false);
 
     const { id } = useParams();
+    const titleRef = useRef(null);
 
-    const editNote = () => {
-        console.log({title, main});
-        setEditing(true);
+    const toggleReadEdit = () => {
+        setEditing(!editing);
+        if(editing == false) {
+            titleRef.current.focus();
+        }
     }
 
     const updateNote = async () => {
         const payload = { title, main };
 
         try {
-            // setLoading(true);
-            // Axios automatically resolves the JSON payload under response.data
             const response = await axios.put(`http://localhost:4000/notes/${id}`, payload);
             console.log(response.data);
         } catch (err) {
@@ -43,15 +48,16 @@ function Note () {
         // Define an async function to fetch data
         const fetchNote = async () => {
           try {
-            setLoading(true);
             // Axios automatically resolves the JSON payload under response.data
             const response = await axios.get(`http://localhost:4000/notes/${id}`);
             setTitle(response.data.title); 
             setMain(response.data.main);
+
+            setIsLoading(false);
           } catch (err) {
             console.log(err.message || 'Something went wrong');
           } finally {
-            setLoading(false);
+            setIsLoading(false);
             // console.log(notes);
           }
         };
@@ -62,60 +68,81 @@ function Note () {
     return (
         <>
             {/* <Navbar /> */}
-            <div className="actions-container">
-                <div className="actions-wrapper">
-                    <div className="sub-actions">
-                        <button 
-                            onClick={deleteNote} 
-                            className="save-btn"
-                        >
-                            Delete
-                        </button>
-                        <button 
-                            onClick={updateNote} 
-                            className="update-btn"
-                        >
-                            Update
-                        </button>
-                    </div>
-                    <div className="main-actions">
-                        <button 
-                            onClick={editNote} 
-                            className="read-btn"
-                        >
-                            Read
-                        </button>
-                        <button 
-                            onClick={editNote} 
-                            className="edit-btn"
-                        >
-                            Edit
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div className="add-note-container">
-                <div className="add-note-wrapper">
-                    <div className="heading-wrapper">
-                        <input 
-                            type="text" 
-                            className="note-title"
-                            placeholder="Note title..."
-                            defaultValue={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            readOnly={!editing}
-                        />
-                    </div>
-                    <div className="main-wrapper">
-                        <textarea 
-                            className="note-editor"
-                            placeholder="Write your note..."
-                            defaultValue={main}
-                            onChange={(e) => setMain(e.target.value)}
-                            readOnly={!editing}
-                        />
+            <div className="note-page-container">
+                <div className="note-actions-wrapper">
+                    <div className="actions-wrapper">
+                        <div className="main-actions">
+                            <button 
+                                className="active"
+                            >
+                                <h4>
+                                    {
+                                        editing ? "Edit Mode"
+                                            : "Read Mode"
+                                    }
+                                </h4>
+                            </button>
+                            
+                        </div>
+                        <div className="sub-actions">
+                            <button 
+                                onClick={toggleReadEdit} 
+                                className="read-edit btn"
+                            >
+                                {
+                                    editing ? <AiOutlineRead className="icon edit" />
+                                        :  <BiEdit className="icon edit"/>
+                                }
+                            </button>
+                            <button 
+                                onClick={deleteNote} 
+                                className="save-btn"
+                            >
+                                <SlOptionsVertical className="icon options" />
+                            </button>
+                            <button 
+                                onClick={updateNote} 
+                                className="upload-btn"
+                            >
+                                <h3>Update</h3>
+                            </button>
+                        </div>
+                       
                     </div>
                 </div>
+                {
+                    isLoading ?
+                        <div className="note-main-wrapper">
+                            <h3></h3>
+                            <p className="one"></p>
+                            <p className="two"></p>
+                        </div>
+                    :   
+                        <div className="note-main-wrapper">
+                            <div className="note-title-wrapper">
+                                <input 
+                                    type="text" 
+                                    id="note-title"
+                                    className="note-title"
+                                    ref={titleRef}
+                                    placeholder="Note title..."
+                                    defaultValue={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    readOnly={!editing}
+                                />
+                            </div>
+                            <div className="note-content-wrapper">
+                                <textarea 
+                                    id="note-content"
+                                    className="note-content"
+                                    placeholder="Write your note..."
+                                    defaultValue={main}
+                                    onChange={(e) => setMain(e.target.value)}
+                                    readOnly={!editing}
+                                />
+                            </div>
+                        </div>
+                }
             </div>
         </>
     )

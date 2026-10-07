@@ -1,0 +1,74 @@
+.navbar-container {
+    width: 100%;
+    height: auto;
+    background-color: inherit;
+
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+    border-top: 1px solid rgba(0,0,0,0.05);
+
+
+    .navbar-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        // gap: 10px;
+        padding: 10px 30px;
+        background-color: white;
+
+
+        button {
+            outline: none;
+            background: inherit;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-title-wrapper {
+
+        }
+
+        .nav-actions-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
+
+            .create-note.btn {
+                text-decoration: none;
+                width: fit-content;
+                
+                h3 {
+                    padding: 6.5px 18px;
+                    background-color: rgb(29, 161, 242);
+                    border: 1px solid rgb(29, 161, 242);
+                    border-radius: 25px;
+                    color: white;
+                    font-weight: 400;
+                    letter-spacing: 0.1px;
+                    font-size: 16px;
+                }
+            }
+
+            .option-btn {
+                padding: 8px;
+                border: 1px solid white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+
+                &:hover {
+                    background-color: rgba(29, 160, 242, 0.131);
+                    border: 1px solid rgba(3, 19, 29, 0.03);
+                }
+
+                .icon.options {
+                    height: 18px;
+                    width: 18px;
+                    stroke-width: -100px;
+                }
+            }
+        }
+    }
+}

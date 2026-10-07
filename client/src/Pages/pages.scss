@@ -256,116 +256,214 @@
     }
 }
 
-.home-container {
+.home-root-container {
+    position: relative;
     background-color: #e4edf0;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     width: 100%;
 
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-
-    .home-wrapper {
-        margin-top: 10px;
-        width: 750px;
+    .nav-and-tools-container {
+        background-color: #e4edf0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
         height: auto;
-        padding-bottom: 10px;
+    }
+    
+    .home-nav-container {
+        margin-top: 63px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
         
-        .home-nav-container {
-            // border: 1px;
+        .home-nav-wrapper {
+            width: 750px;
             border: 1px solid rgba(0,0,0,0.25);
             display: flex;
             align-items: center;
             justify-content: space-between;
             background-color: rgb(255, 255, 255);
-            padding: 20px;
+            padding: 12px 25px;
 
             .nav-items-wrapper {
                 display: flex;
                 align-items: flex-start;
                 justify-content: baseline;
-                gap: 15px;
+                gap: 5px;
+                
+                a.nav-link {
+                    text-decoration: none;
+
+                    h4 {
+                        padding: 5px 15px;
+                        border: 1px solid white;
+                        border-radius: 15px;
+                        font-weight: 400;
+                        color: rgba(0, 0, 0, 0.665);
+                        letter-spacing: 0.35px;
+                        cursor: pointer;
+                        font-size: 16.1px;
+    
+                        &:hover {
+                            background-color: rgba(29, 160, 242, 0.05);
+                            border: 1px solid rgba(3, 19, 29, 0.03);
+                        }
+                    }
+                }
+
+                a.nav-link.active {
+                    h4 {
+                        background-color: #1DA1F2;
+                        color: white;
+                        border: 1px solid white;
+                        border-radius: 15px;
+                        font-weight: 500;
+                        letter-spacing: 0.35px;
+                        cursor: pointer;
+                        font-size: 16.1px;
+    
+                        &:hover {
+                            background-color: #1DA1F2;
+                            color: white;
+                        }
+                    }
+                }
             }
        
-            .nav-btn-wrapper {
-                .link {
-                    outline: none;
-                    background-color: #1DA1F2;
-                    color: white;
-                    padding: 6px 18px;
-                    border: 1px solid #1c9beb;
-                    border-radius: 35px;
+            .nav-search-container {
+                .nav-search-wrapper.focused {
+                    border: 1px solid rgb(29, 161, 242);
                 }
-            }
-        }
-        
-        
-        .main-wrapper {
-            margin-top: 10px;
-            // border: 1px solid rgba(0,0,0,0.15);
-            
-            // padding: 0px 20px;
-            .note-wrapper {
-                background-color: white;
-                border: 1px solid rgba(0,0,0,0.25);
-                padding: 20px;
-                margin-top: 5px;
 
-                p {
-                    margin-top: 10px;
-                }
-            
-            }
+                .nav-search-wrapper {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 6px;
 
-            .note-wrapper.loading {
-                @keyframes text-shimmer {
-                    from {
-                        background-position: 200% 0;
+                    border: 1px solid rgba(0,0,0,0.25);
+                    padding: 7px 18px;
+                    border-radius: 30px;
+
+                    .search.icon {
+                        height: 21px;
+                        width: 21px;
+                        color: rgba(0, 0, 0, 0.7);
+                        cursor: pointer;
                     }
-                    
-                    to {
-                        background-position: -200% 0;
+
+                    input.search-input {
+                        border: none;
+                        font-size: 16px;
+                        letter-spacing: -0.1px;
+                        padding: 0px 2px;
+
+                        &:focus {
+                            border: none;
+                            outline: none;
+                        }
                     }
-                }
-
-                h4 {
-                    height: 18px;
-                    width: 250px;
-                }
-
-                p {
-                    height: 14px;
-                    width: 500px;
-                }
-
-                p.two {
-                    width: 350px;
-                }
-
-                p.one {
-                    margin-top: 13.5px;
-                }
-
-                h4, p {
-                    // height: 16px;
-                    border-radius: 4px;
-                    
-                    /* Create the shimmer gradient */
-                    background: linear-gradient(
-                    90deg, 
-                    #e0e0e0 25%, 
-                    #f0f0f0 50%, 
-                    #e0e0e0 75%
-                    );
-                    background-size: 200% 100%;
-                    
-                    /* Attach the loop animation */
-                    animation: text-shimmer 1.5s infinite linear;
                 }
             }
         }
     }
+
+    .home-container {
+        height: auto;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    
+        .home-wrapper {
+            width: 750px;
+            height: auto;
+            padding-bottom: 10px;
+            
+            .main-wrapper {
+                // margin-top: 121px;
+    
+                .note-wrapper {
+                    background-color: white;
+                    border: 1px solid rgba(0,0,0,0.25);
+                    padding:25px 30px;
+                    margin-top: 5px;
+    
+                    h3 {
+                        font-size: 21px;
+                        font-weight: 500;
+                    }
+    
+                    p {
+                        margin-top: 10px;
+                        font-size: 17.3px;
+                        line-height: 27px;
+                        color: rgb(56, 56, 56);
+                        letter-spacing: 0.08px;
+                        font-weight: 400;
+                        overflow: hidden;
+                        display: -webkit-box;           /* Required for line-clamping */
+                        -webkit-box-orient: vertical;   /* Required for line-clamping */
+                        -webkit-line-clamp: 2;      
+                        width: 100%;   
+                    }
+                
+                }
+    
+                .note-wrapper.loading {
+                    @keyframes text-shimmer {
+                        from {
+                            background-position: 200% 0;
+                        }
+                        
+                        to {
+                            background-position: -200% 0;
+                        }
+                    }
+    
+                    h4 {
+                        height: 18px;
+                        width: 250px;
+                    }
+    
+                    p {
+                        height: 14px;
+                        width: 500px;
+                    }
+    
+                    p.two {
+                        width: 350px;
+                    }
+    
+                    p.one {
+                        margin-top: 13.5px;
+                    }
+    
+                    h4, p {
+                        // height: 16px;
+                        border-radius: 4px;
+                        
+                        /* Create the shimmer gradient */
+                        background: linear-gradient(
+                        90deg, 
+                        #e0e0e0 25%, 
+                        #f0f0f0 50%, 
+                        #e0e0e0 75%
+                        );
+                        background-size: 200% 100%;
+                        
+                        /* Attach the loop animation */
+                        animation: text-shimmer 1.5s infinite linear;
+                    }
+                }
+            }
+        }
+    }
+
 }
+
 
 .add-note-container {
     background-color: #e4edf0;
@@ -507,5 +605,200 @@
         }
 
         
+    }
+}
+
+.note-page-container {
+    background-color: #e4edf0;
+    height: 100vh;
+    width: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    .note-actions-wrapper {
+        background-color: #e4edf0;
+        height: auto;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    
+        .actions-wrapper {
+            margin-top: 10px;
+            width: 750px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            // gap: 10px;
+            padding: 0px 20px;
+            background-color: white;
+            border: 1px solid rgba(0,0,0,0.25);
+
+            button {
+                outline: none;
+                background: inherit;
+                border: none;
+                cursor: pointer;
+            }
+
+            .main-actions {
+                width: auto;
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                gap: 20px;
+
+                button {
+                    padding: 15px 5px;
+                    border-bottom: 2px solid rgb(39, 39, 39);
+
+                    h4 {
+                        font-size: 15px;
+                        color: rgb(39, 39, 39);
+                    }
+                }
+
+                button.active {                   
+                    cursor: default;
+                }
+            }
+
+            .sub-actions {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1px;
+
+                button {
+                    padding: 8px;
+                    border: 1px solid white;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &:hover {
+                        background-color: rgba(29, 160, 242, 0.131);
+                        border: 1px solid rgba(3, 19, 29, 0.03);
+                    }
+                    .icon {
+                        height: 23px;
+                        width: 23px;
+                    }
+
+                    .icon.options {
+                        height: 19px;
+                        width: 19px;
+                    }
+                }
+
+                button.upload-btn {
+                    padding: 5px 18px;
+                    background-color: rgb(29, 161, 242);
+                    border: 1px solid rgb(29, 161, 242);
+                    border-radius: 25px;
+                    margin-left: 8px;
+
+                    h3 {
+                        color: white;
+                        font-weight: 500;
+                        letter-spacing: 0.1px;
+                    }
+                }
+            }
+            
+        }
+    }
+
+    .note-main-wrapper {
+        padding: 30px;
+        margin-top: 10px;
+        border: 1px solid rgba(0,0,0,0.25);
+        background-color: white;
+        width: 750px;
+        height: auto;
+
+
+        .note-title-wrapper {
+            // padding: 0px;
+
+            input#note-title {
+                outline: none;
+                border: none;
+                width: 100%;
+                font-size: 21.5px;
+                font-weight: 500;
+                vertical-align: baseline;
+            }
+        }
+        
+        .note-content-wrapper {
+            padding: 0px;
+            margin-top: 20px;
+
+            textarea#note-content {
+                outline: none;
+                resize: none;
+                width: 100%;
+                border: none;
+                overflow: hidden;
+                field-sizing: content;
+                font-size: 18px;
+                line-height: 27.5px;
+                color: rgb(56, 56, 56);
+                letter-spacing: 0.08px;
+                font-weight: 400;
+                vertical-align: baseline;
+            }
+        }
+
+        @keyframes text-shimmer {
+            from {
+                background-position: 200% 0;
+            }
+            
+            to {
+                background-position: -200% 0;
+            }
+        }
+
+        p, h3 {
+            // height: 16px;
+            border-radius: 4px;
+            
+            /* Create the shimmer gradient */
+            background: linear-gradient(
+            90deg, 
+            #e0e0e0 25%, 
+            #f0f0f0 50%, 
+            #e0e0e0 75%
+            );
+            background-size: 200% 100%;
+            
+            /* Attach the loop animation */
+            animation: text-shimmer 1.5s infinite linear;
+        }
+
+        h3 {
+            height: 18px;
+            width: 250px;
+        }
+
+        p {
+            height: 14px;
+            width: 500px;
+            margin-top: 13px;
+        }
+
+        p.one {
+            margin-top: 20px;
+        }
+
+        p.two {
+            width: 350px;
+        }
     }
 }
